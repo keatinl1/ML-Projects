@@ -2,6 +2,7 @@
 #
 # Done using PyTorch
 
+
 import torch 
 import torch.nn as nn
 import pandas as pd
@@ -16,8 +17,6 @@ print(data) # uncomment to see data
 X_numpy, y_numpy = data.x, data.y
 X_numpy, y_numpy = np.array(X_numpy), np.array(y_numpy)
 
-plt.plot(X_numpy, y_numpy, 'ro')
-plt.show() # uncomment to see the plot before line fitting
 
 # 2 - Make tensors from np.arrays
 X = torch.from_numpy(X_numpy.astype(np.float32))
@@ -36,17 +35,21 @@ model = nn.Linear(input_size, output_size)
 
 
 # 4 - Loss and optimiser
-learning_rate = 0.01
+learning_rate = 0.05
 criterion = nn.MSELoss()
 optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
 
 
 # 5 - Training Loop
-num_epochs = 100
+num_epochs = 300
+loss_array = np.zeros(num_epochs)
+
 for epoch in range(num_epochs):
     # forward pass and loss
     y_predicted = model(X)
     loss = criterion(y_predicted, y)
+
+    loss_array[epoch] = loss
 
     # backward pass
     loss.backward()
@@ -62,9 +65,18 @@ for epoch in range(num_epochs):
 
 
 # 6 - Plot
-
 predicted = model(X).detach()
-plt.plot(X_numpy, predicted, 'b')
-#plt.show()
 
+plot1 = plt.figure(1)
+plt.plot(X_numpy, y_numpy, 'ro')
+plt.plot(X_numpy, predicted, 'b')
+plt.xlabel('X')
+plt.ylabel('y')
+
+plot2 = plt.figure(2)
+plt.plot(loss_array)
+plt.xlabel('Steps')
+plt.ylabel('Loss')
+
+plt.show()
 
