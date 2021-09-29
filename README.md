@@ -17,6 +17,7 @@ Unsupervised
 - k Means Clustering
 - Recommender System
 
-All in Python with a few different libraries (PyTorch, scikit-learn etc.).
+I will do the majority of the models using scikit-learn, then neural 
+networks using PyTorch and TensorFlow.
 This will compliment the theory learned in Andrew Ng's Machine Learning 
 Coursera course.
