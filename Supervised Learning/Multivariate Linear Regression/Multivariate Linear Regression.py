@@ -6,6 +6,10 @@
 # Our model will allow us to predict the area affected by 
 # the fire.
 
+# Dataset available at: 
+# https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/
+
+
 # 0 - Setup & data import
 
 import pandas as pd
