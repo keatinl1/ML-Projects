@@ -6,6 +6,8 @@
 
 # Just in time for Halloween !
 
+# Available at: https://www.kaggle.com/fivethirtyeight/the-ultimate-halloween-candy-power-ranking/
+
 import pandas as pd
 
 from sklearn.linear_model import LogisticRegression
