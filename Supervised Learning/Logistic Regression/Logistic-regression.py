@@ -47,29 +47,28 @@ print("The score of the model is", format(score, ".4f"))
 # next 2 are 0<x<1
 # last 0<x<100
 
-rc1 = np.random.choice([0, 1], size=(8,))
-rc2 = np.random.uniform(size=2)
-rc3 = np.random.randint(low=1, high=100, size=1)
+c1 = np.random.choice([0, 1], size=(8,))
+c2 = np.random.uniform(size=2)
+c3 = np.random.randint(low=1, high=100, size=1)
 
-random_candy = np.concatenate((rc1, rc2, rc3), axis=None)
-random_candy = [random_candy]
+user_candy = np.concatenate((c1, c2, c3), axis=None)
+user_candy = [user_candy]
 
-print('Randomly generated candy:\n', random_candy)
+print('Randomly generated candy:\n', user_candy)
 
 
 
 # (ii) - this asks user for array input instead
 '''
-import numpy as np
-Xnew=[]  
+user_candy=[]  
 print("Please enter the 11 feature values")
 for i in range(11):  
     Xnew.append(float(input())) 
-Xnew = np.array([Xnew])
-print('User generated candy:\n', Xnew)
+Xnew = np.array([user_candy])
+print('User generated candy:\n', user_candy)
 '''
 
-ynew = model.predict(random_candy)
+ynew = model.predict(user_candy)
 
 if ynew == [0]:
     print('This is not chocolate.')
