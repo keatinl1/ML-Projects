@@ -6,16 +6,23 @@
 
 # Just in time for Halloween !
 
-# Available at: https://www.kaggle.com/fivethirtyeight/the-ultimate-halloween-candy-power-ranking/
+# Available at: 
+# https://www.kaggle.com/fivethirtyeight/the-ultimate-halloween-candy-power-ranking/
 
+# 0 - Imports
+
+import numpy as np
 import pandas as pd
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-
+from sklearn.datasets import make_blobs
 
 data = pd.read_csv("candy-data.csv")
-print(data.head())
+#print(data.head())
+
+
+# 1 - Separate data
 
 X = data.drop(["chocolate", "competitorname"], axis = 'columns')
 y = data.chocolate
@@ -23,10 +30,49 @@ y = data.chocolate
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
-model = LogisticRegression()
+# 2 - Model 
 
+model = LogisticRegression()
 model.fit(X_train, y_train)
 
+# 3 - Evaluate Model
 
 score = model.score(X_test, y_test)
-print(format(score, ".4f"))
+print("The score of the model is", format(score, ".4f"))
+
+# 4 - Predicting
+
+#(i) - this block generates a random transaction
+# first 8 are binary
+# next 2 are 0<x<1
+# last 0<x<100
+
+rc1 = np.random.choice([0, 1], size=(8,))
+rc2 = np.random.uniform(size=2)
+rc3 = np.random.randint(low=1, high=100, size=1)
+
+random_candy = np.concatenate((rc1, rc2, rc3), axis=None)
+random_candy = [random_candy]
+
+print('Randomly generated candy:\n', random_candy)
+
+
+
+# (ii) - this asks user for array input instead
+'''
+import numpy as np
+Xnew=[]  
+print("Please enter the 11 feature values")
+for i in range(11):  
+    Xnew.append(float(input())) 
+Xnew = np.array([Xnew])
+print('User generated candy:\n', Xnew)
+'''
+
+ynew = model.predict(random_candy)
+
+if ynew == [0]:
+    print('This is not chocolate.')
+
+else:
+    print('This is chocolate.')
